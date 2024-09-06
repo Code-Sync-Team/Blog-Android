@@ -1,3 +1,16 @@
 <resources>
     <string name="app_name">Blog</string>
+    <string name="title_activity_sign_up">SignUpActivity</string>
+    <string name="userNameLabel">UserName</string>
+    <string name="emailLabel">Email</string>
+    <string name="passwordLabel">Password</string>
+    <string name="passwordConfirmLabel">Password Confirm</string>
+    <string name="signUp">Sign Up</string>
+    <string name="userNameInvalidCharactersMessage">이름에는 숫자나 기호가 포함될 수 없습니다.</string>
+    <string name="userNameLengthValidationMessage">이름은 2~5자여야 합니다.</string>
+    <string name="emailInvalidFormatMessage">이메일 형식이 올바르지 않습니다.</string>
+    <string name="passwordValidationMessage">비밀번호는 8~16자여야 합니다.\n비밀번호는 영문과 숫자를 포함해야 합니다.</string>
+    <string name="passwordMismatchMessage">비밀번호가 일치하지 않습니다.</string>
+    <string name="signupSuccessSnackBarContentDescription">회원가입 성공!</string>
+    <string name="signupSuccessSnackBarActionLabel">확인</string>
 </resources>
