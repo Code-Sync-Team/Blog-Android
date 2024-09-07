@@ -2,14 +2,14 @@ package com.example.blog.ui.navigation
 
 import androidx.navigation.NavGraphBuilder
 import androidx.navigation.compose.composable
-import com.example.blog.ui.signup.SignUpRoute
+import com.example.blog.ui.login.LoginRoute
 
-const val BLOG_ROUTE = "blog"
+const val LOGIN_ROUTE = "login"
 
-fun NavGraphBuilder.blogScreen() {
+fun NavGraphBuilder.loginScreen() {
     composable(
-        route = BLOG_ROUTE
+        route = LOGIN_ROUTE
     ) {
-        SignUpRoute()
+        LoginRoute()
     }
 }

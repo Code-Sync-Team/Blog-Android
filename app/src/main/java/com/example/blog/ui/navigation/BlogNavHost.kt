@@ -13,10 +13,10 @@ fun BlogNavHost(
 
     NavHost(
         navController = navController,
-        startDestination = SIGNUP_ROUTE,
+        startDestination = LOGIN_ROUTE,
         modifier = modifier
     ) {
-        signUpScreen()
+        loginScreen()
     }
 
 }
