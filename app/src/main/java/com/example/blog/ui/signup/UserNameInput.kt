@@ -12,38 +12,25 @@ import com.example.blog.R
 import com.example.blog.ui.theme.BlogTheme
 
 @Composable
-fun UserNameInput(
+fun NickNameInput(
     value: String,
     onValueChange: (String) -> Unit,
-    isLengthError: Boolean,
-    isFormatError: Boolean,
     modifier: Modifier = Modifier
 ) {
     SignUpInput(
         value = value,
         onValueChange = onValueChange,
-        isError = isLengthError || isFormatError,
-        supportingText = {
-            if (isLengthError) {
-                Text(text = stringResource(id = R.string.userNameLengthValidationMessage))
-            } else if (isFormatError) {
-                Text(text = stringResource(id = R.string.userNameInvalidCharactersMessage))
-            }
-        },
-        label = stringResource(id = R.string.userNameLabel),
         modifier = modifier
     )
 }
 
 @Preview
 @Composable
-private fun UserNameInputPreview() {
+private fun NickNameInputPreview() {
     BlogTheme {
-        UserNameInput(
+        NickNameInput(
             value = "asdff",
             onValueChange = {  },
-            isLengthError = true,
-            isFormatError = false,
             modifier = Modifier
                 .fillMaxWidth()
                 .padding(20.dp)
