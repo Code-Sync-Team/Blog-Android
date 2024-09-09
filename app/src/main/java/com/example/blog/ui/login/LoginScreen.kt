@@ -22,6 +22,7 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
 import com.example.blog.R
+import com.example.blog.ui.components.BasicTextField
 
 @Composable
 fun LoginRoute(
@@ -73,18 +74,19 @@ fun LoginContent(
         horizontalAlignment = Alignment.CenterHorizontally
     ) {
 
-        OutlinedTextField(
+        BasicTextField(
             value = email,
-            onValueChange = onEmailChange
+            onValueChange = onEmailChange,
+            label = stringResource(id = R.string.emailLabel)
         )
 
         Spacer(modifier = Modifier.padding(7.dp))
 
-        OutlinedTextField(
+        BasicTextField(
             value = password,
             onValueChange = onPasswordChange,
-            visualTransformation =  PasswordVisualTransformation(),
-            keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Password)
+            label = stringResource(id = R.string.passwordLabel),
+            visualTransformation = PasswordVisualTransformation()
         )
 
         Spacer(modifier = Modifier.padding(10.dp))

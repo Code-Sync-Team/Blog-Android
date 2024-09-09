@@ -1,6 +1,5 @@
 <resources>
     <string name="app_name">Blog</string>
-    <string name="title_activity_sign_up">SignUpActivity</string>
     <string name="login">로그인</string>
     <string name="userNameLabel">UserName</string>
     <string name="emailLabel">Email</string>
