@@ -11,15 +11,22 @@ import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
+sealed interface SignUpScreenEvent {
+    data object Idle : SignUpScreenEvent
+    data object Success : SignUpScreenEvent
+    data class Error(val message: String) : SignUpScreenEvent
+}
+
 data class SignUpUiState(
     val email: String = "",
     val password: String = "",
     val nickname: String = "",
-    val name: String = "",
+    val name: String = ""
 ) {
-    private val emailREGEX = "^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\\.[a-zA-Z]{2,6}$"
+    private val emailRegex = "^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\\.[a-zA-Z]{2,6}$"
 
-    val isEmailFormatError = email.isNotEmpty() && !email.matches(Regex(emailREGEX))
+    private val isEmailFormatError =
+        (email.isNotEmpty() && !email.matches(Regex(emailRegex)))
 
     private val areFieldsFilled =
         nickname.isNotEmpty() && email.isNotEmpty() &&
@@ -34,9 +41,11 @@ data class SignUpUiState(
 class SignUpViewModel @Inject constructor(
     private val blogRepository: BlogRepository
 ) : ViewModel() {
-    private val _uiState = MutableStateFlow(SignUpUiState())
 
+    private val _uiState = MutableStateFlow(SignUpUiState())
     val uiState: StateFlow<SignUpUiState> = _uiState.asStateFlow()
+    private val _signUpScreenEvent = MutableStateFlow<SignUpScreenEvent>(SignUpScreenEvent.Idle)
+    val signUpScreenEvent: StateFlow<SignUpScreenEvent> = _signUpScreenEvent.asStateFlow()
 
     fun join(
         email: String,
@@ -52,10 +61,10 @@ class SignUpViewModel @Inject constructor(
                 name = name
             ).fold(
                 onSuccess = {
-
+                    _signUpScreenEvent.value = SignUpScreenEvent.Success
                 },
                 onFailure = {
-
+                    _signUpScreenEvent.value = SignUpScreenEvent.Error(it.message ?: "회원가입을 실패하였습니다.")
                 }
             )
         }

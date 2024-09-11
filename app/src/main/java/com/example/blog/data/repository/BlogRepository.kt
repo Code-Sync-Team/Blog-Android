@@ -1,7 +1,7 @@
 package com.example.blog.data.repository
 
-import com.example.blog.data.model.JoinResponse
-import com.example.blog.data.model.LoginResponse
+import com.example.blog.data.model.response.JoinResponse
+import com.example.blog.data.model.response.LoginResponse
 
 interface BlogRepository {
     suspend fun login(

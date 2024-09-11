@@ -16,7 +16,12 @@ fun BlogNavHost(
         startDestination = LOGIN_ROUTE,
         modifier = modifier
     ) {
-        loginScreen()
+        loginScreen(
+            onNavigateToSignUp = { navController.navigateToSignUp() }
+        )
+        signUpScreen(
+            navController = navController
+        )
     }
 
 }

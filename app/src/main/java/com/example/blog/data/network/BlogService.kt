@@ -1,9 +1,9 @@
 package com.example.blog.data.network
 
-import com.example.blog.data.model.JoinRequest
-import com.example.blog.data.model.JoinResponse
-import com.example.blog.data.model.LoginRequest
-import com.example.blog.data.model.LoginResponse
+import com.example.blog.data.model.request.JoinRequest
+import com.example.blog.data.model.response.JoinResponse
+import com.example.blog.data.model.request.LoginRequest
+import com.example.blog.data.model.response.LoginResponse
 import retrofit2.http.Body
 import retrofit2.http.POST
 

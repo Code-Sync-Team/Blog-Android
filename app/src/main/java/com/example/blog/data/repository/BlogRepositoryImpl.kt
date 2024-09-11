@@ -1,12 +1,16 @@
 package com.example.blog.data.repository
 
-import com.example.blog.data.model.JoinRequest
-import com.example.blog.data.model.JoinResponse
-import com.example.blog.data.model.LoginRequest
-import com.example.blog.data.model.LoginResponse
+import com.example.blog.data.model.request.JoinRequest
+import com.example.blog.data.model.request.LoginRequest
+import com.example.blog.data.model.response.JoinResponse
+import com.example.blog.data.model.response.LoginResponse
 import com.example.blog.data.network.BlogService
+import kotlinx.serialization.Serializable
+import org.json.JSONObject
+import retrofit2.HttpException
 import javax.inject.Inject
 
+@Serializable
 class BlogRepositoryImpl @Inject constructor(
     private val blogService: BlogService
 ) : BlogRepository {
@@ -38,8 +42,12 @@ class BlogRepositoryImpl @Inject constructor(
                 )
             )
             Result.success(result)
+        } catch (e: HttpException) {
+            val errorBody = e.response()?.errorBody()?.string()
+            val errorResponse = JSONObject(errorBody ?: "").getString("message")
+            Result.failure(Exception(errorResponse))
         } catch (e: Exception) {
-            Result.failure(Exception("회원가입을 실패하였습니다."))
+            Result.failure(e)
         }
     }
 }
