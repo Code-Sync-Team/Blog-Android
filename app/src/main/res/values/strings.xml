@@ -16,4 +16,6 @@
     <string name="signupSuccessSnackBarActionLabel">확인</string>
     <string name="hide_password">비밀번호 숨김</string>
     <string name="show_password">비밀번호 보암</string>
+    <string name="create_blog">글쓰기</string>"
+    <string name="exit">나가기</string>
 </resources>

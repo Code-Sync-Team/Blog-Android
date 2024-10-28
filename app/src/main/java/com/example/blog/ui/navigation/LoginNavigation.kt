@@ -7,13 +7,15 @@ import com.example.blog.ui.login.LoginRoute
 const val LOGIN_ROUTE = "login"
 
 fun NavGraphBuilder.loginScreen(
-    onNavigateToSignUp: () -> Unit
+    onNavigateToSignUp: () -> Unit,
+    onNavigateToMain: () -> Unit
 ) {
     composable(
         route = LOGIN_ROUTE
     ) {
         LoginRoute(
-            onNavigateToSignUp = onNavigateToSignUp
+            onNavigateToSignUp = onNavigateToSignUp,
+            onNavigateToMain = onNavigateToMain
         )
     }
 }

@@ -34,12 +34,14 @@ import com.example.blog.ui.components.PasswordTextField
 @Composable
 fun LoginRoute(
     onNavigateToSignUp: () -> Unit,
+    onNavigateToMain: () -> Unit,
     modifier: Modifier = Modifier
 ) {
     val viewModel: LoginViewModel = hiltViewModel()
     LoginScreen(
         viewModel = viewModel,
         onNavigateToSignUp = onNavigateToSignUp,
+        onNavigateToMain = onNavigateToMain,
         modifier = modifier
     )
 }
@@ -48,9 +50,14 @@ fun LoginRoute(
 private fun LoginScreen(
     viewModel: LoginViewModel,
     onNavigateToSignUp: () -> Unit,
+    onNavigateToMain: () -> Unit,
     modifier: Modifier = Modifier,
 ) {
     val loginUiState by viewModel.loginUiState.collectAsState()
+
+    if (loginUiState.isLoginSuccessful) {
+        onNavigateToMain()
+    }
 
     Scaffold(
         modifier = modifier

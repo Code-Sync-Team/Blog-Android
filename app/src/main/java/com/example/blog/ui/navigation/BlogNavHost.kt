@@ -17,9 +17,13 @@ fun BlogNavHost(
         modifier = modifier
     ) {
         loginScreen(
-            onNavigateToSignUp = { navController.navigateToSignUp() }
+            onNavigateToSignUp = { navController.navigateToSignUp() },
+            onNavigateToMain = { navController.navigateToMain() }
         )
         signUpScreen(
+            navController = navController
+        )
+        mainScreen(
             navController = navController
         )
     }
