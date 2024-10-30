@@ -16,23 +16,23 @@ import com.example.blog.ui.theme.BlogTheme
 
 @Composable
 fun BookListRoute(
-    onNavigateToBlogWrite: () -> Unit,
+    onNavigateToCreatePost: () -> Unit,
     modifier: Modifier = Modifier,
 ) {
     BookListScreen(
-        onNavigateToBlogWrite = onNavigateToBlogWrite,
+        onNavigateToCreatePost = onNavigateToCreatePost,
         modifier = modifier
     )
 }
 
 @Composable
 fun BookListScreen(
-    onNavigateToBlogWrite: () -> Unit,
+    onNavigateToCreatePost: () -> Unit,
     modifier: Modifier = Modifier,
 ) {
     Box(modifier = modifier.fillMaxSize()) {
         FloatingActionButton(
-            onClick = onNavigateToBlogWrite,
+            onClick = onNavigateToCreatePost,
             modifier = modifier
                 .align(Alignment.BottomEnd)
                 .padding(20.dp)
@@ -50,7 +50,7 @@ fun BookListScreen(
 private fun BookListScreenPreview() {
     BlogTheme {
         BookListScreen(
-            onNavigateToBlogWrite = {}
+            onNavigateToCreatePost = {}
         )
     }
 }

@@ -13,15 +13,20 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
+import androidx.navigation.NavController
 
 @Composable
-fun CreateBlogScreen(
+fun CreatePostRoute(
+    navController: NavController,
     modifier: Modifier = Modifier
 ) {
     val viewModel: CreateBlogViewModel = hiltViewModel()
 
     CreateBlogScreen(
         viewModel = viewModel,
+        onNavigateToMain = {
+            navController.popBackStack()
+        },
         modifier = modifier
     )
 }
@@ -29,17 +34,38 @@ fun CreateBlogScreen(
 @Composable
 private fun CreateBlogScreen(
     viewModel: CreateBlogViewModel,
+    onNavigateToMain: () -> Unit,
     modifier: Modifier = Modifier
 ) {
-    val uiState by viewModel.uiState.collectAsState()
+    val createPostUiState by viewModel.createPostUiState.collectAsState()
 
+    CreatePostContent(
+        createPostUiState = createPostUiState,
+        onTitleChange = viewModel::updateTitle,
+        onContentChange = viewModel::updateContent,
+        onCreatePost = viewModel::createPost,
+        onExit = onNavigateToMain,
+        modifier = modifier
+    )
+}
+
+@Composable
+fun CreatePostContent(
+    createPostUiState: CreatePostUiState,
+    onTitleChange: (String) -> Unit,
+    onContentChange: (String) -> Unit,
+    onExit: () -> Unit,
+    onCreatePost: () -> Unit,
+    modifier: Modifier = Modifier
+) {
     Column(
         modifier = modifier
+            .padding(top = 10.dp)
             .fillMaxSize()
     ) {
         ContentInputField(
-            value = uiState.title,
-            onValueChange = viewModel::updateTitle,
+            value = createPostUiState.title,
+            onValueChange = onTitleChange,
             placeholder = "제목은 입력해주세요.",
             singleLine = true
         )
@@ -53,23 +79,29 @@ private fun CreateBlogScreen(
         )
 
         ContentInputField(
-            value = uiState.content,
-            onValueChange = viewModel::updateContent,
+            value = createPostUiState.content,
+            onValueChange = onContentChange,
             placeholder = "내용을 입력하세요.",
             modifier = Modifier
                 .weight(1f)
         )
 
         BlogEditorBottomBar(
-            onCreateBlog = { /*TODO*/ },
-            onExit = { /*TODO*/ }
+            onCreateBlog = onCreatePost,
+            onExit = onExit,
+            isCreateButtonEnabled = createPostUiState.isCreateButtonEnabled
         )
     }
 }
 
-
 @Preview
 @Composable
 private fun CreateBlogScreenPreview() {
-    CreateBlogScreen()
+    CreatePostContent(
+        createPostUiState = CreatePostUiState(),
+        onTitleChange = {},
+        onContentChange = {},
+        onCreatePost = {},
+        onExit = {}
+    )
 }

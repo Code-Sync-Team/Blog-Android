@@ -1,6 +1,8 @@
 package com.example.blog.di
 
 import com.example.blog.BuildConfig
+import com.example.blog.data.datasource.TokenDataSource
+import com.example.blog.data.network.AuthInterceptor
 import com.example.blog.data.network.BlogService
 import com.jakewharton.retrofit2.converter.kotlinx.serialization.asConverterFactory
 import dagger.Module
@@ -38,10 +40,20 @@ object NetworkModule {
 
     @Provides
     @Singleton
+    fun provideAuthInterceptor(
+        tokenDataSource: TokenDataSource
+    ): AuthInterceptor {
+        return AuthInterceptor(tokenDataSource)
+    }
+
+    @Provides
+    @Singleton
     fun providesOkHttpClient(
-        loggingInterceptor: HttpLoggingInterceptor
+        loggingInterceptor: HttpLoggingInterceptor,
+        authInterceptor: AuthInterceptor
     ): OkHttpClient {
         return OkHttpClient.Builder()
+            .addInterceptor(authInterceptor)
             .addInterceptor(loggingInterceptor)
             .build()
     }
@@ -50,5 +62,4 @@ object NetworkModule {
     @Singleton
     fun provideLoggingInterceptor(): HttpLoggingInterceptor =
         HttpLoggingInterceptor().setLevel(HttpLoggingInterceptor.Level.BODY)
-
 }

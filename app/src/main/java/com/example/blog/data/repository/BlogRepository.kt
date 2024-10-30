@@ -1,5 +1,6 @@
 package com.example.blog.data.repository
 
+import com.example.blog.data.model.response.CreatePostResponse
 import com.example.blog.data.model.response.JoinResponse
 import com.example.blog.data.model.response.LoginResponse
 
@@ -15,4 +16,9 @@ interface BlogRepository {
         nickname: String,
         name: String
     ): Result<JoinResponse>
+
+    suspend fun createPost(
+        title: String,
+        content: String
+    ): Result<CreatePostResponse>
 }

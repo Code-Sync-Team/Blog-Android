@@ -24,6 +24,9 @@ fun BlogNavHost(
             navController = navController
         )
         mainScreen(
+            onNavigateToCreatePost = { navController.navigateToCreatePost() }
+        )
+        createPostScreen(
             navController = navController
         )
     }

@@ -12,13 +12,13 @@ fun NavController.navigateToMain() {
 }
 
 fun NavGraphBuilder.mainScreen(
-    navController: NavController
+    onNavigateToCreatePost: () -> Unit
 ) {
     composable(
         route = MAIN_ROUTE
     ) {
         BookListRoute(
-            onNavigateToBlogWrite = { }
+            onNavigateToCreatePost = onNavigateToCreatePost
         )
     }
 }

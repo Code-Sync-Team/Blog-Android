@@ -27,6 +27,7 @@ import com.example.blog.R
 fun BlogEditorBottomBar(
     onCreateBlog: () -> Unit,
     onExit: () -> Unit,
+    isCreateButtonEnabled: Boolean,
     modifier: Modifier = Modifier
 ) {
     Row(
@@ -38,7 +39,7 @@ fun BlogEditorBottomBar(
         horizontalArrangement = Arrangement.SpaceBetween
     ) {
         Button(
-            onClick = onCreateBlog,
+            onClick = onExit,
             colors = ButtonDefaults.buttonColors(
                 containerColor = Color.Transparent,
                 contentColor = Color.Black
@@ -56,11 +57,14 @@ fun BlogEditorBottomBar(
         }
 
         Button(
-            onClick = onExit,
+            onClick = onCreateBlog,
             colors = ButtonDefaults.buttonColors(
-                containerColor = Color.Black
+                containerColor = Color.Black,
+                disabledContainerColor = Color.LightGray
             ),
+            enabled = isCreateButtonEnabled,
             shape = RoundedCornerShape(20),
+
         ) {
             Text(text = stringResource(id = R.string.create_blog))
         }
@@ -72,6 +76,7 @@ fun BlogEditorBottomBar(
 private fun BlogEditorBottomBarPreview() {
     BlogEditorBottomBar(
         onCreateBlog = {},
-        onExit = {}
+        onExit = {},
+        isCreateButtonEnabled = true
     )
 }
